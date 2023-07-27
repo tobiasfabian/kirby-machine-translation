@@ -123,6 +123,8 @@ kirby()->api()->call('machine-translate/pages/' . $pageId, 'POST', [
 ]);
 ```
 
+API endpoint to translate the site content. `/api/machine-translate/site`
+
 ### Field method
 
 The field method `$field->translate($targetLang, $blueprintField)` translates the field value and returns the field with the translated value. All field types are supported. The type of field is specified via `$blueprintField['type']`.
@@ -143,6 +145,8 @@ $page->update([
 The page method `$page->translate($targetLang, $sourceLang, $force)` allows you to translate the content of a page into a target language. By default already translated fields will not be overwritten. By setting `$force` to `true` all fields will be translated, existing fields will be overwritten.
 
 An object field `machineTranslated` with `date` and `showInfo` is added to the translated page content. This can be used to detect machine translated pages and display a notice/warning on the frontend that the text is machine translated.
+
+To translate the site content, use `$site->translate($targetLang, $sourceLang, $force)`.
 
 ### Translate Class
 

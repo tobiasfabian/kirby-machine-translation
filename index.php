@@ -37,6 +37,9 @@ App::plugin('tobiaswolf/machine-translation', [
 	'pageMethods' => [
 		'machineTranslate' => require_once __DIR__ . '/page-methods/machineTranslate.php',
 	],
+	'siteMethods' => [
+		'machineTranslate' => require_once __DIR__ . '/site-methods/machineTranslate.php',
+	],
 	'sections' => [
 		'machine-translate' => require_once __DIR__ . '/sections/machineTranslate.php',
 	],

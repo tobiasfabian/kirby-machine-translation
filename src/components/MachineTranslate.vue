@@ -108,9 +108,14 @@ export default {
 					'x-language': this.$language.code,
 				},
 				body: JSON.stringify(body),
+			}).catch((error) => {
+				console.error(error);
+				this.$panel.notification.error(error);
 			});
-			this.$reload();
-			this.updateProps();
+			if (data) {
+				this.$reload();
+				this.updateProps();
+			}
 		}
 	}
 };
