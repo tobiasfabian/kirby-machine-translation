@@ -3,8 +3,11 @@
 This Kirby plugin allows you to automatically translate pages using the DeepL API. All field types are supported.
 
 **If you are using machine translation, you should inform your users of this fact.**\
-For example, you could display a message like this (Text available via `t('tobiaswolf.machine-translation.info')`)\
-*This page has been machine translated. Despite the high quality of machine translation, the translation may contain errors.*
+For example, you could display a message like this (Text available via `t('tobiaswolf.machine-translation.info')`)
+
+```
+This page has been machine translated. Despite the high quality of machine translation, the translation may contain errors.
+```
 
 ## Installation
 
@@ -70,6 +73,8 @@ sections:
 	machineTranslate:
 		type: machine-translate
 ```
+
+<img width="542" alt="Bildschirmfoto 2023-07-27 um 13 09 57" src="https://github.com/tobiasfabian/machine-translation/assets/1524319/58897afa-af3a-4359-82ec-c8df12a37ad1">
 
 After the page is translated an object field `machineTranslated` with `date` and `showInfo` is saved to the translated page content. This can be used to detect machine translated pages and display a notice/warning on the frontend that the text is machine translated. You can add this object field to any fields section (optional).
 
@@ -162,7 +167,7 @@ You can disable the cache via config.
 ```php
 // config/config.php
 return [
-  'cache.tobiaswolf.machine-translation.translate' => false, // default true
+	'cache.tobiaswolf.machine-translation.translate' => false, // default true
 ]
 ```
 
