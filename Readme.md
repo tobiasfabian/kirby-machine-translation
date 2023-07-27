@@ -74,7 +74,7 @@ sections:
     type: machine-translate
 ```
 
-<img width="542" alt="Bildschirmfoto 2023-07-27 um 13 09 57" src="https://github.com/tobiasfabian/machine-translation/assets/1524319/58897afa-af3a-4359-82ec-c8df12a37ad1">
+<img width="542" alt="Screenshot of Kirby Panel with Button “Translate page”." src="https://github.com/tobiasfabian/machine-translation/assets/1524319/58897afa-af3a-4359-82ec-c8df12a37ad1">
 
 After the page is translated an object field `machineTranslated` with `date` and `showInfo` is saved to the translated page content. This can be used to detect machine translated pages and display a notice/warning on the frontend that the text is machine translated. You can add this object field to any fields section (optional).
 
