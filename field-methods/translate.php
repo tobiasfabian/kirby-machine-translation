@@ -13,7 +13,7 @@ use Tobiaswolf\MachineTranslation\Translate;
  *
  * @return Field|null Returns the translated field as a Field object, or null if translation is not allowed or not possible.
  */
-return function (Field $field, string $targetLang, ?array $blueprintField = null): ?Field
+return function (Field $field, string $targetLang, ?array $blueprintField = null): Field
 {
 	$key = $field->key();
 
@@ -29,7 +29,7 @@ return function (Field $field, string $targetLang, ?array $blueprintField = null
 	}
 
 	if (($blueprintField['translate'] ?? true) === false || $key === 'uuid' || $field->isEmpty()) {
-		return null;
+		return $field;
 	}
 
 	switch ($blueprintField['type']) {
