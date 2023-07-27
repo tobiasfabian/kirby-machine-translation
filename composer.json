@@ -1,0 +1,21 @@
+{
+	"name": "tobiaswolf/machine-translation",
+	"description": "Translate pages/fields with Deepl API",
+	"version": "1.0.0-beta.1",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Tobias Wolf",
+			"email": "hello@tobiaswolf.me"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		}
+	}
+}

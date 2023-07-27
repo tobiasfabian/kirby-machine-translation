@@ -1,0 +1,13 @@
+label: tobiaswolf.machine-translation.panel.label
+type: object
+fields:
+	date:
+		type: date
+		time:
+			step: 1
+		help: tobiaswolf.machine-translation.panel.date.help
+	showInfo:
+		label: tobiaswolf.machine-translation.panel.showInfo.label
+		type: toggle
+		default: true
+		help: tobiaswolf.machine-translation.panel.showInfo.help
