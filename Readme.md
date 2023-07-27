@@ -70,8 +70,8 @@ Add the section `machine-translate` to your blueprint to get the interface to tr
 
 ```yaml
 sections:
-	machineTranslate:
-		type: machine-translate
+  machineTranslate:
+    type: machine-translate
 ```
 
 <img width="542" alt="Bildschirmfoto 2023-07-27 um 13 09 57" src="https://github.com/tobiasfabian/machine-translation/assets/1524319/58897afa-af3a-4359-82ec-c8df12a37ad1">
@@ -80,11 +80,11 @@ After the page is translated an object field `machineTranslated` with `date` and
 
 ```yaml
 sections:
-	fields:
-		type: fields
-		fields:
-			machineTranslated:
-				extends: fields/machineTranslated
+  fields:
+    type: fields
+    fields:
+      machineTranslated:
+        extends: fields/machineTranslated
 ```
 
 ### API endpoint
