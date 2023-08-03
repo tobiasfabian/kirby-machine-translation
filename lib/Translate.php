@@ -200,13 +200,27 @@ class Translate
 	 */
 	static function translate(array $text, string $targetLang, ?string $sourceLang = null): array
 	{
-		$options = option('tobiaswolf.machine-translation.deepl');
-		$authKey = $options['authKey'];
+		$authKey = option('tobiaswolf.machine-translation.deepl.authKey');
+
+		$data = [
+			'text' => $text,
+			'source_lang' => $sourceLang,
+			'target_lang' => $targetLang,
+			'split_sentences' => option('tobiaswolf.machine-translation.deepl.split_sentences'),
+			'preserve_formatting' => option('tobiaswolf.machine-translation.deepl.preserve_formatting'),
+			'formality' => option('tobiaswolf.machine-translation.deepl.formality'),
+			'glossary_id' => option('tobiaswolf.machine-translation.deepl.glossary_id'),
+			'tag_handling' => option('tobiaswolf.machine-translation.deepl.tag_handling'),
+			'outline_detection' => option('tobiaswolf.machine-translation.deepl.outline_detection'),
+			'non_splitting_tags' => option('tobiaswolf.machine-translation.deepl.non_splitting_tags'),
+			'splitting_tags' => option('tobiaswolf.machine-translation.deepl.splitting_tags'),
+			'ignore_tags' => option('tobiaswolf.machine-translation.deepl.ignore_tags'),
+		];
 
 		$cache = kirby()->cache('tobiaswolf.machine-translation.translate');
 
 		if ($cache->enabled()) {
-			$cacheKey = md5(serialize(compact('text', 'targetLang', 'sourceLang', 'options')));
+			$cacheKey = md5(serialize($data));
 			$cachedResponse = $cache->get($cacheKey);
 
 			if ($cachedResponse){
@@ -224,22 +238,6 @@ class Translate
 		}
 		$url = 'https://' . $apiDomain . '/v2/translate';
 
-
-		$data = [
-			'text' => $text,
-			'source_lang' => $sourceLang,
-			'target_lang' => $targetLang,
-			'split_sentences' => $options['split_sentences'],
-			'preserve_formatting' => $options['preserve_formatting'],
-			'formality' => $options['formality'],
-			'glossary_id' => $options['glossary_id'],
-			'tag_handling' => $options['tag_handling'],
-			'outline_detection' => $options['outline_detection'],
-			'non_splitting_tags' => $options['non_splitting_tags'],
-			'splitting_tags' => $options['splitting_tags'],
-			'ignore_tags' => $options['ignore_tags'],
-		];
-
 		$params = [
 			'method' => 'POST',
 			'headers' => [
@@ -251,7 +249,7 @@ class Translate
 
 		$response = Remote::request($url, $params);
 		$response = $response->json();
-		if (!array_key_exists('translations', $response)) {
+		if (!array_key_exists('translations', $response ?? [])) {
 			throw new Exception($response['message'] ?? 'Fatal error with Deepl API');
 		}
 
