@@ -248,17 +248,66 @@ class Translate
 		];
 
 		$response = Remote::request($url, $params);
-		$response = $response->json();
-		if (!array_key_exists('translations', $response ?? [])) {
-			throw new Exception($response['message'] ?? 'Fatal error with Deepl API');
+
+		$code = $response->code();
+		$responseData = $response->json();
+
+		if ($code !== 200 || !array_key_exists('translations', $responseData ?? [])) {
+			self::throwTranslateError($code, $url, $response, $data);
 		}
 
-		$translations = $response['translations'];
+		$translations = $responseData['translations'];
 
 		if ($cache->enabled()) {
 			$cache->set($cacheKey, $translations);
 		}
 
 		return $translations;
+	}
+
+	private static function throwTranslateError(int $code, string $url, Remote $response, $data) {
+		// https://github.com/DeepLcom/openapi/blob/v2.11.0/openapi.json#L307-L336
+		switch ($code) {
+			case 400:
+				$key = 'tobiaswolf.machine-translation.deepl.400';
+				break;
+			case 403:
+				$key = 'tobiaswolf.machine-translation.deepl.403';
+				break;
+			case 404:
+				$key = 'tobiaswolf.machine-translation.deepl.404';
+				break;
+			case 413:
+				$key = 'tobiaswolf.machine-translation.deepl.413';
+				break;
+			case 429:
+				$key = 'tobiaswolf.machine-translation.deepl.429';
+				break;
+			case 456:
+				$key = 'tobiaswolf.machine-translation.deepl.456';
+				break;
+			case 500:
+				$key = 'tobiaswolf.machine-translation.deepl.500';
+				break;
+			case 504:
+				$key = 'tobiaswolf.machine-translation.deepl.504';
+				break;
+			case 529:
+				$key = 'tobiaswolf.machine-translation.deepl.529';
+				break;
+			default:
+				$key = 'tobiaswolf.machine-translation.deepl.unknown';
+		}
+
+		throw new Exception([
+			'key' => $key,
+			'details' => [
+				'code' => $code,
+				'url' => $url,
+				'data' => $data,
+				'response' => $response->content(),
+			],
+		]);
+
 	}
 }
