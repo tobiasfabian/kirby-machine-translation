@@ -11,7 +11,7 @@ use Tobiaswolf\MachineTranslation\Translate;
  * @param string $targetLang The target language code (e.g., 'en', 'fr', 'es').
  * @param array|null $blueprintField (Optional) The blueprint settings for the field, if not provided, it will be fetched from the parent model. If provided, it must contain 'type' and can have 'translate'.
  *
- * @return Field|null Returns the translated field as a Field object, or null if translation is not allowed or not possible.
+ * @return Field  Returns the translated field as a Field object, or the original field if translation is not allowed or not possible.
  */
 return function (Field $field, string $targetLang, ?array $blueprintField = null): Field
 {
