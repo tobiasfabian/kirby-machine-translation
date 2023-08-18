@@ -36,6 +36,7 @@ return function (Field $field, string $targetLang, ?array $blueprintField = null
 		case 'tags':
 		case 'text':
 		case 'textarea':
+		case 'list':
 		case 'writer':
 			$field = Translate::translateTextField($field, $targetLang);
 			break;
