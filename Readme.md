@@ -3,7 +3,7 @@
 This Kirby plugin allows you to automatically translate pages using the DeepL API. All field types are supported.
 
 **If you are using machine translation, you should inform your users of this fact.**\
-For example, you could display a message like this (Text available via `t('tobiaswolf.machine-translation.info')`)
+For example, you could display a message like this (Text available via [`t('tobiaswolf.machine-translation.info')`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/translations/en.php#L17))
 
 ```
 This page has been machine translated. Despite the high quality of machine translation, the translation may contain errors.
@@ -66,7 +66,7 @@ You can set several options, provided by DeepL. Read more about the options in t
 
 ### Blueprint section
 
-Add the section `machine-translate` to your blueprint to get the interface to translate the page.
+Add the section [`machine-translate`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/sections/machineTranslate.php) to your blueprint to get the interface to translate the page.
 
 ```yaml
 sections:
@@ -76,7 +76,7 @@ sections:
 
 <img width="542" alt="Screenshot of Kirby Panel with Button “Translate page”" src="https://github.com/tobiasfabian/machine-translation/assets/1524319/f85d94a1-0cb7-4b8c-9ed1-9a4a0a93f98c">
 
-After the page is translated an object field `machineTranslated` with `date` and `showInfo` is saved to the translated page content. This can be used to detect machine translated pages and display a notice/warning on the frontend that the text is machine translated. You can add this object field to any fields section (optional).
+After the page is translated an object field [`machineTranslated`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/blueprints/fields/machineTranslated.yml) with `date` and `showInfo` is saved to the translated page content. This can be used to detect machine translated pages and display a notice/warning on the frontend that the text is machine translated. You can add this object field to any fields section (optional).
 
 ```yaml
 sections:
@@ -89,7 +89,7 @@ sections:
 
 ### API endpoint
 
-This plugin provides an API endpoint `/api/machine-translate/pages/(:any)` that can be used to translate an entire page. Read [Kirby’s API Guide](https://getkirby.com/docs/guide/api/introduction) to learn more about using the API.
+This plugin provides an API endpoint [`/api/machine-translate/pages/(:any)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/api/routes/machine-translate.php#L10-L41) that can be used to translate an entire page. Read [Kirby’s API Guide](https://getkirby.com/docs/guide/api/introduction) to learn more about using the API.
 
 The endpoint allows `get` and `post` requests. The endpoint requires a `language` (target language) query. When making a `post` request, `sourceLang` and `forceOverwrite` can be added. By default `sourceLang` is the default language. If `forceOverwrite` is false or not specified, only fields where the target field does not exist or is empty will be translated.
 
@@ -123,11 +123,11 @@ kirby()->api()->call('machine-translate/pages/' . $pageId, 'POST', [
 ]);
 ```
 
-API endpoint to translate the site content. `/api/machine-translate/site`
+API endpoint to translate the site content. [`/api/machine-translate/site`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/api/routes/machine-translate.php#L42-L73)
 
 ### Field method
 
-The field method `$field->translate($targetLang, $blueprintField)` translates the field value and returns the field with the translated value. All field types are supported. The type of field is specified via `$blueprintField['type']`.
+The field method [`$field->translate($targetLang, $blueprintField)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/field-methods/translate.php) translates the field value and returns the field with the translated value. All field types are supported. The type of field is specified via `$blueprintField['type']`.
 
 If you want to save the translated field, you can do this like this.
 
@@ -142,15 +142,15 @@ $page->update([
 
 ### Page method
 
-The page method `$page->translate($targetLang, $sourceLang, $force)` allows you to translate the content of a page into a target language. By default already translated fields will not be overwritten. By setting `$force` to `true` all fields will be translated, existing fields will be overwritten.
+The page method [`$page->translate($targetLang, $sourceLang, $force)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/page-methods/machineTranslate.php) allows you to translate the content of a page into a target language. By default already translated fields will not be overwritten. By setting `$force` to `true` all fields will be translated, existing fields will be overwritten.
 
 An object field `machineTranslated` with `date` and `showInfo` is added to the translated page content. This can be used to detect machine translated pages and display a notice/warning on the frontend that the text is machine translated.
 
-To translate the site content, use `$site->translate($targetLang, $sourceLang, $force)`.
+To translate the site content, use [`$site->translate($targetLang, $sourceLang, $force)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/site-methods/machineTranslate.php).
 
 ### Translate Class
 
-If you want to, you can use the static method of the `Translate` class. Use the `translate($text, $targetLang, $sourceLang)` method to translate text. Make sure you pass an array as the first parameter (you can translate multiple texts at once). You can omit the third parameter to have the source language automatically detected.
+If you want to, you can use the static method of the [`Translate`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/lib/Translate.php) class. Use the [`translate($text, $targetLang, $sourceLang)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/lib/Translate.php#L201) method to translate text. Make sure you pass an array as the first parameter (you can translate multiple texts at once). You can omit the third parameter to have the source language automatically detected.
 
 ```php
 use Tobiaswolf\MachineTranslation\Translate;
