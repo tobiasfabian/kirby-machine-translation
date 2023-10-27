@@ -142,11 +142,11 @@ $page->update([
 
 ### Page method
 
-The page method [`$page->translate($targetLang, $sourceLang, $force)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/page-methods/machineTranslate.php) allows you to translate the content of a page into a target language. By default already translated fields will not be overwritten. By setting `$force` to `true` all fields will be translated, existing fields will be overwritten.
+The page method [`$page->machineTranslate($targetLang, $sourceLang, $force)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/page-methods/machineTranslate.php) allows you to translate the content of a page into a target language. By default already translated fields will not be overwritten. By setting `$force` to `true` all fields will be translated, existing fields will be overwritten.
 
 An object field `machineTranslated` with `date` and `showInfo` is added to the translated page content. This can be used to detect machine translated pages and display a notice/warning on the frontend that the text is machine translated.
 
-To translate the site content, use [`$site->translate($targetLang, $sourceLang, $force)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/site-methods/machineTranslate.php).
+To translate the site content, use [`$site->machineTranslate($targetLang, $sourceLang, $force)`](https://github.com/tobiasfabian/kirby-machine-translation/blob/main/site-methods/machineTranslate.php).
 
 ### Translate Class
 
