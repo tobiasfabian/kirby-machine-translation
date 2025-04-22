@@ -4,6 +4,7 @@
 	"version": "1.0.0-beta.4",
 	"type": "kirby-plugin",
 	"license": "MIT",
+	"homepage": "https://github.com/tobiasfabian/kirby-machine-translation",
 	"authors": [
 		{
 			"name": "Tobias Wolf",
