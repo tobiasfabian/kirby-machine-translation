@@ -47,11 +47,12 @@ export default {
 	},
 	computed: {
 		defaultLanguage() {
-			console.log(this.$languages);
-			return this.$languages.find((language) => language.default === true).code.toUpperCase();
+			console.log(this.$panel.languages);
+			return this.$panel.languages.find((language) => language.default === true).code.toUpperCase();
 		},
 		isDefaultLanguage() {
-			return this.$language.default;
+			console.log(this.$panel.language);
+			return this.$panel.language.default;
 		},
 		helpHtml() {
 			const {
@@ -96,16 +97,18 @@ export default {
 			});
 		},
 		async translate() {
-			const apiUrl = this.$urls.api;
-			const currentContentState = this.$store.state.content.current;
+			const apiUrl = this.$panel.urls.api;
+			const link = this.$panel.view.props.link;
+			const language = this.$panel.language.code;
+			const path = `machine-translate${link}?language=${language}`;
 			const body = {
 				forceOverwrite: this.overwrite,
 			};
-			const data = await this.$api.request(`machine-translate${currentContentState}`, {
+			const data = await this.$api.request(`machine-translate${link}?language=${language}`, {
 				method: 'post',
 				headers: {
-					'x-csrf': this.$system.csrf,
-					'x-language': this.$language.code,
+					'x-csrf': this.$panel.system.csrf,
+					'x-language': this.$panel.language.code,
 				},
 				body: JSON.stringify(body),
 			}).catch((error) => {

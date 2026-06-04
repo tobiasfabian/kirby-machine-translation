@@ -29,7 +29,7 @@ composer require tobiasfabian/machine-translation
 
 ## Requirements
 
-- Kirby 4.0+
+- Kirby 5.0+
 - Authentication Key for DeepL API ([DeepL API for developers](https://www.deepl.com/de/pro#developer))
 
 ## Setup

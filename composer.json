@@ -1,7 +1,7 @@
 {
 	"name": "tobiaswolf/machine-translation",
 	"description": "Translate pages/fields with Deepl API",
-	"version": "1.0.0-beta.4",
+	"version": "1.1",
 	"type": "kirby-plugin",
 	"license": "MIT",
 	"homepage": "https://github.com/tobiasfabian/kirby-machine-translation",
